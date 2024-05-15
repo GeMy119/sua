@@ -1,0 +1,61 @@
+.estalam-container {
+    max-width: 600px;
+    margin: auto;
+    background-color: black;
+  }
+  
+  .estalam-header {
+    text-align: center;
+    color: white;
+  }
+  
+  .service-description {
+    background-color: #28a745;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .service-title h3 {
+    color: #fff;
+    text-align: center;
+  }
+  
+  .form-container {
+    border: 2px solid #28a745;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    color: white;
+  }
+  
+  .form-group input {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  

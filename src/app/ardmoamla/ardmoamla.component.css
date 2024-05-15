@@ -1,0 +1,18 @@
+.text-black {
+    color: black;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: right; /* Align content to the right */
+  }
+  th {
+    background-color:whitesmoke ;
+    color: solid  black;
+    font-weight: bold;
+  }
+  

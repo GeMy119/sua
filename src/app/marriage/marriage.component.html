@@ -1,0 +1,28 @@
+<div class="marriage-container">
+  <div class="marriage-header">
+    <h2>استفسار حالة التصاريح</h2>
+  </div>
+  <div class="service-description">
+    <div class="service-title">
+      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة التصاريح</h3>
+    </div>
+  </div>
+  <div class="form-container">
+    <h4 *ngIf="inquiryResult">الرجاء التأكد من رقم الهويه او رقم الصادر</h4>
+    <form [formGroup]="marriageForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="idNumber">رقم الهوية</label>
+        <input type="text" class="form-control" id="idNumber" formControlName="idNumber"
+          placeholder="الرجاء إدخال رقم الهوية">
+      </div>
+      <div class="form-group">
+        <label for="issueNumber">رقم القيد</label>
+        <input type="text" class="form-control" id="issueNumber" formControlName="issueNumber"
+          placeholder="الرجاء إدخال رقم الصادر">
+      </div>
+      <button type="submit" class="btn btn-primary">عرض</button>
+
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+    </form>
+  </div>
+</div>

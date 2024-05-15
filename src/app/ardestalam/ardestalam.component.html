@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <div class="row justify-content-end  h-100">
+    <div class="col-md-6 w-100">
+      <div class="card">
+        <div class="card-header text-end"> <!-- هنا تم تعديل الـ class -->
+          <h5 class="card-title">استفسار عن صلاحية الإقامة</h5>
+          <p class="card-subtitle">تفاصيل العمالة الوافدة || {{data.name}}</p>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-6 text-end">
+              <p>رقم هوية الكفيل: {{data.sponsorId}}</p>
+              <p>تاريخ اخر تعديل: {{data.dateOfLastModification | removeTimeFromDate}}</p>
+            </div>
+            <div class="col-md-6 text-start">
+              <p>رقم المصدر: {{data.sourceNumber}}</p>
+              <p>الجهة المصدرة: وزارة العمل-آلي</p>
+            </div>
+          </div>
+          <table class="table" dir="rtl">
+            <thead>
+              <tr>
+                <th scope="col">الإسم</th>
+                <th scope="col">رقم الاقامة</th>
+                <th scope="col">نوع الموافقة</th>
+                <th scope="col">الجنسية</th>
+                <th scope="col">المهنة</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- يمكنك استبدال البيانات الوهمية بالبيانات الفعلية -->
+              <tr *ngFor="let worker of data.workers">
+                <td>{{worker.workerName}}</td>
+                <td>{{worker.residencyNumber}}</td>
+                <td>{{worker.typeOfConsent}}</td>
+                <td>{{worker.nationality}}</td>
+                <td>{{worker.occupation}}</td>
+                <td>{{worker.type}}</td>
+              </tr>
+              <!-- يمكنك إضافة صفوف أخرى هنا -->
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary me-3" (click)="printPage()">طباعة</button>
+          <button class="btn btn-secondary">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

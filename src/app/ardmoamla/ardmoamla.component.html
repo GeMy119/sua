@@ -1,0 +1,84 @@
+<div class="container mt-4">
+  <div class="row justify-content-end h-100">
+    <div class="col-md-6 w-100">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title text-end">تفاصيل || {{data.name}}</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 text-end order-md-2">
+              <img
+                src="../../assets/eshar.jpg" alt="Profile Picture" width="200" height="100">
+              <p class="font-weight-bold text-black">تمت الموافقة على منحه الجنسية السعودية</p>
+              <img
+                src="../../assets/barkod.jpg" alt=" Picture" width="200" height="50">
+              <p>رقم المعاملة: {{data.transactionNumber}}</p>
+              <p>تاريخ الاصدار: {{data.releaseDate | removeTimeFromDate}}</p>
+              <p>الجهة المصدرة: وزارة الداخلية-آلي</p>
+            </div>
+            <div class="col-md-6 text-start order-md-1">
+              <!-- Insert small profile picture here -->
+              <img
+                [src]="data.image" alt="Profile Picture" width="100" height="100">
+            </div>
+          </div>
+          <table class="table mt-3">
+            <thead>
+              <tr>
+                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">الجنسية</th>
+                <th scope="col">النوع</th>
+                <th scope="col">حجز موعد</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Insert dynamic data here -->
+              <tr>
+                <td>{{data.userSerialNumber}}</td>
+                <td>{{data.userOccupation}}</td>
+                <td>معاملة الاحوال المدنية</td>
+                <td>{{data.dateBoking | removeTimeFromDate}}</td>
+              </tr>
+              <!-- You can add more rows as needed -->
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary me-3" (click)="printPage()">طباعة</button>
+          <button class="btn btn-secondary">إلغاء</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<table>
+  <tr>
+    <th colspan="2">يجوز منح الجنسية العربية السعودية للأجنبي الذي تتوفر فيه الشروط الآتية :</th>
+  </tr>
+  <tr>
+    <td colspan="2">
+      
+       <p>أن يكون عند تقديم الطلب قد بلغ سن الرشد-
+       <br>
+ 
+أن يكون غير معنوه أو مختل عقليا-
+       <br>
+:أن يكون حين تقديم الطلب -       <br>
+         
+        أ- قد اكتسب صفة الإقامة الدائمة العادية في المملكة العربية السعودية بمقتضى أحكام نظامها الخاص لمدة لاتقل عن خمس سنوات متواليات 
+        <br>
+          
+          ب- أن لايكون قد صدر عليه حكم قضائي بالسجن لجريمة أخلاقية لمدة تزيد عن ستة شهور
+           <br>
+          ج- أن يثبت ارتزاقه بطريقة مشروعة
+         <br>
+        د-أن يكون حسن السير والسلوك
+       </p>
+      
+      <p>ويشفع طالب التجنس بطلبه تصريح الإقامة الدائمة وجواز سفره القانوني او أية وثيقة تعتبرها السلطات المختصة قائمة مقام الجواز القانوني وكل وثيقة تتعلق بالجنسية التي ينسلخ منها وبكل ورقة تؤيد ما هو مطالب بإثباته بمقتضى أحكام هذا النظام</p>
+    </td>
+  </tr>
+</table>
+

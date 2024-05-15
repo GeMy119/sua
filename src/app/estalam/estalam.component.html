@@ -1,0 +1,28 @@
+<div class="estalam-container">
+  <div class="estalam-header">
+    <h2>استفسار عن طلبات التأشيرات</h2>
+  </div>
+  <div class="service-description">
+    <div class="service-title">
+      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن طلبات التأشيرات حسب سجلاتهم في وزارة
+        العمل</h3>
+    </div>
+  </div>
+  <div class="form-container">
+    <form [formGroup]="estalamForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="idNumber">رقم الهوية</label>
+        <input type="text" class="form-control" id="sponsorId" formControlName="sponsorId"
+          placeholder="الرجاء إدخال رقم الهوية">
+      </div>
+      <div class="form-group">
+        <label for="issueNumber">رقم القيد </label>
+        <input type="text" class="form-control" id="sourceNumber" formControlName="sourceNumber"
+          placeholder="الرجاء إدخال رقم الصادر">
+      </div>
+      <button type="submit" class="btn btn-primary">عرض</button>
+
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+    </form>
+  </div>
+</div>

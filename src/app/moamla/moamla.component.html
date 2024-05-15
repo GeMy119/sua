@@ -1,0 +1,49 @@
+<!-- <div class="moamla-container">
+  <div class="moamla-header">
+    <h2>استفسار عن طلبات التأشيرات</h2>
+  </div>
+  <div class="service-description">
+    <div class="service-title">
+      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة المعاملات في الأحوال المدنية</h3>
+    </div>
+  </div>
+  <div class="form-container">
+    <form [formGroup]="moamlaForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="transactionNumber">رقم المعاملة</label>
+        <input type="text" class="form-control" type="text" id="transactionNumber" [(ngModel)]="transactionNumber"
+          formControlName="transactionNumber" placeholder="الرجاء إدخال رقم المعاملة">
+      </div>
+      <button (click)="inquireAboutTransaction()" type="button" class="btn btn-primary"
+        [routerLink]="['/ardmoamla']">عرض</button>
+
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+    </form>
+  </div>
+</div> -->
+<div class="moamla-container">
+  <div class="moamla-header">
+    <h2>استفسار عن طلبات التأشيرات</h2>
+  </div>
+  <div class="service-description">
+    <div class="service-title">
+      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة المعاملات في الأحوال المدنية</h3>
+    </div>
+  </div>
+
+  <!-- Add h4 element for form not found message -->
+  <h4 *ngIf="inquiryResult">الرجاء التأكد من رقم المعاملة</h4>
+
+  <div class="form-container" *ngIf="moamlaForm">
+    <form [formGroup]="moamlaForm" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="transactionNumber">رقم المعاملة</label>
+        <input type="text" class="form-control" id="transactionNumber" [(ngModel)]="transactionNumber"
+          formControlName="transactionNumber" placeholder="الرجاء إدخال رقم المعاملة">
+      </div>
+      <button type="submit" class="btn btn-primary">عرض</button>
+
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+    </form>
+  </div>
+</div>

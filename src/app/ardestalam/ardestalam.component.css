@@ -1,0 +1,18 @@
+.container {
+    height: 100%;
+  }
+  
+  .card {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .card-header, .card-footer {
+    background-color: #f0f0f0;
+  }
+  
+  .card-body {
+    height: calc(100% - 116px); /* ارتفاع الهيدر والفوتر معًا */
+    overflow-y: auto;
+  }
+  
