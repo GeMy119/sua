@@ -69,30 +69,18 @@ body {
 }
 
 .captcha-image {
-    padding: 10px;
-    /* زيادة مساحة الحواف الداخلية */
+    padding: 5px;
     border: 1px solid #ccc;
-    /* تعيين حد رمادي */
     background-color: #f9f9f9;
-    /* تعيين لون الخلفية */
     font-family: 'Courier New', Courier, monospace;
-    /* تعيين خط النص */
     font-size: 24px;
-    /* تعيين حجم النص */
     letter-spacing: 2px;
-    /* تعيين المسافة بين الأحرف */
     margin-right: 10px;
-    /* تعيين المسافة اليمنى */
     background-image: url('../../assets/123.jpg');
-    /* تعيين صورة الخلفية إذا كنت ترغب في ذلك */
     background-size: cover;
-    /* تغطية الخلفية بالكامل */
     background-position: center;
-    /* توسيط الخلفية */
     color: #333;
-    /* تعيين لون النص */
     text-align: center;
-    /* توسيط النص داخل العنصر */
 }
 
 .refresh-icon {
