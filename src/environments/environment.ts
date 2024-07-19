@@ -8,7 +8,7 @@ export interface Environment {
 }
 export const environment: Environment = {
   production: false,
-  apiUrl: "https://api.saudiservices.site"
+  apiUrl: "http://localhost:8080"
 };
 /*
  * For easier debugging in development mode, you can import the following file

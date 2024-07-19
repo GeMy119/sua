@@ -10,8 +10,8 @@ import { MariagePermitService } from './services/mariage-permit.service';
 })
 export class MarriageComponent implements OnInit {
   marriageForm!: FormGroup;
-  inquiryResult: any = false
-
+  inquiryResult: string | false = false;
+  captchaText: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,44 +20,57 @@ export class MarriageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.generateCaptcha();
     this.marriageForm = this.formBuilder.group({
-      idNumber: ['', Validators.required],
-      issueNumber: ['', Validators.required]
+      idNumber: ['', Validators.required], // Example pattern for 10-digit number
+      issueNumber: ['', Validators.required], // Example pattern for 6-digit number
+      captcha: ['', Validators.required]
     });
   }
 
   submitForm() {
     if (this.marriageForm.valid) {
-      const idNumber = this.marriageForm.get('idNumber')!.value;
-      const issueNumber = this.marriageForm.get('issueNumber')!.value;
-      console.log(idNumber)
-      this.mariagePermitService.findMariagePermit(idNumber, issueNumber)
-        .subscribe(
-          (response) => {
-            console.log('Response:', response);
-            if (response && response.data) {
-              this.router.navigate(['/ardmarri'], { state: { data: response.data } });
-            } else {
-              console.log('Document not found');
+      if (this.marriageForm.get('captcha')!.value === this.captchaText) {
+        const idNumber = this.marriageForm.get('idNumber')!.value;
+        const issueNumber = this.marriageForm.get('issueNumber')!.value;
+        this.mariagePermitService.findMariagePermit(idNumber, issueNumber)
+          .subscribe(
+            (response) => {
+              if (response && response.data) {
+                this.router.navigate(['/ardmarri'], { state: { data: response.data } });
+              } else {
+                this.inquiryResult = 'لم يتم العثور على الوثيقة الرجاء التأكد من رقم الهوية و رقم الاصدار';
+              }
+            },
+            (error) => {
+              if (error.status === 404) {
+                this.inquiryResult = 'لم يتم العثور على الوثيقة';
+              } else {
+                console.error('خطأ في الاستفسار عن التصريح:', error);
+                this.inquiryResult = 'حدث خطأ، يرجى المحاولة لاحقاً';
+              }
             }
-          },
-          (error) => {
-            if (error.status === 404) {
-              console.log("Document not found");
-              // Display "Document not found" message
-              this.inquiryResult = true; // Reset the inquiryResult to trigger the message display in the template
-            } else {
-              console.error('Error inquiring about transaction:', error);
-              // Handle other errors, e.g., show error message to the user
-            }
-          }
-        );
-    } else {
-      console.log('Form is invalid. Please fill in all required fields.');
+          );
+      }
+      else {
+        this.inquiryResult = 'الرمز المرئي غير صحيح';
+      }
+    }
+    else {
+      this.inquiryResult = 'النموذج غير صالح. يرجى تعبئة جميع الحقول المطلوبة.';
     }
   }
 
   clearForm() {
     this.marriageForm.reset();
+    this.generateCaptcha();
+  }
+
+  generateCaptcha() {
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    this.captchaText = '';
+    for (let i = 0; i < 5; i++) {
+      this.captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
   }
 }

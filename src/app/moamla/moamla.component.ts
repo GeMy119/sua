@@ -10,8 +10,8 @@ import { TransactionService } from './services/transaction.service';
 })
 export class MoamlaComponent implements OnInit {
   moamlaForm: FormGroup;
-  transactionNumber: string = "";
-  inquiryResult: any = false
+  captchaText: string = '';
+  inquiryResult: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,45 +19,65 @@ export class MoamlaComponent implements OnInit {
     private transactionService: TransactionService
   ) {
     this.moamlaForm = this.formBuilder.group({
-      transactionNumber: ['', Validators.required]
+      transactionNumber: ['', Validators.required],
+      captcha: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
+    this.generateCaptcha();
   }
 
-  inquireAboutTransaction() {
-    return this.transactionService.inquireAboutTransaction(this.transactionNumber);
+  inquireAboutTransaction(transactionNumber: string) {
+    return this.transactionService.inquireAboutTransaction(transactionNumber);
   }
 
   submitForm() {
     if (this.moamlaForm.valid) {
-      this.inquireAboutTransaction().subscribe(
-        (response) => {
-          if (response && response.data) {
-            this.router.navigate(['/ardmoamla'], { state: { data: response.data } });
-          } else {
-            console.log("not founded");
-            // Display "Document not found" message
-            this.inquiryResult = null; // Reset the inquiryResult to trigger the message display in the template
-          }
-        },
-        (error) => {
-          if (error.status === 404) {
-            console.log("Document not found");
-          } else {
-            console.error('Error inquiring about transaction:', error);
-            // Handle other errors, e.g., show error message to the user
-          }
+      const captchaValue = this.moamlaForm.get('captcha')?.value;
+      const transactionNumber = this.moamlaForm.get('transactionNumber')?.value;
+
+      if (captchaValue === this.captchaText) {
+        if (transactionNumber) {
+          this.inquireAboutTransaction(transactionNumber).subscribe(
+            (response) => {
+              if (response && response.data) {
+                this.router.navigate(['/ardmoamla'], { state: { data: response.data } });
+              } else {
+                this.inquiryResult = "لم نعثر علي هذا الرقم الرجاء المحاولة مرة اخري";
+              }
+            },
+            (error) => {
+              if (error.status === 404) {
+                this.inquiryResult = "لم نعثر علي هذا الرقم الرجاء المحاولة مرة اخري";
+              } else {
+                this.inquiryResult = "حدث خطأ. يرجى المحاولة مرة أخرى لاحقًا.";
+                console.error('Error inquiring about transaction:', error);
+              }
+            }
+          );
+        } else {
+          this.inquiryResult = 'الرجاء ادخال رقم المعاملة';
         }
-      );
+      } else {
+        this.inquiryResult = 'كلمة التحقق غير صحيحة. حاول مرة اخرى.';
+      }
     } else {
-      console.log('Form is invalid. Please fill in all required fields.');
+      this.inquiryResult = 'النموذج غير صالح. يرجى ملء جميع الحقول المطلوبة.';
     }
   }
 
-
   clearForm() {
     this.moamlaForm.reset();
+    this.generateCaptcha();
+    this.inquiryResult = null;
+  }
+
+  generateCaptcha() {
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    this.captchaText = '';
+    for (let i = 0; i < 5; i++) {
+      this.captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
   }
 }

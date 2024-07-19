@@ -16,6 +16,10 @@ import { ArdestalamComponent } from './ardestalam/ardestalam.component';
 import { ArdmoamlaComponent } from './ardmoamla/ardmoamla.component';
 import { FormsModule } from '@angular/forms';
 import { RemoveTimeFromDatePipe } from './pipes/remove-time-from-date.pipe';
+import { ArdVisitComponent } from './ard-visit/ard-visit.component';
+import { FindVisitComponent } from './find-visit/find-visit.component';
+import { HijriDatePipe } from './pipes/moment-hijri.pipe';
+
 
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -32,7 +36,10 @@ import { RemoveTimeFromDatePipe } from './pipes/remove-time-from-date.pipe';
     ArdmarriComponent,
     ArdestalamComponent,
     ArdmoamlaComponent,
-    RemoveTimeFromDatePipe
+    RemoveTimeFromDatePipe,
+    HijriDatePipe,
+    ArdVisitComponent,
+    FindVisitComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -1,4 +1,4 @@
-  body {
+body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -7,75 +7,68 @@
     margin: 0;
     background-color: #f9f9f9;
     direction: rtl;
-  }
+}
 
-  .estalam-container {
+.visit-container {
     max-width: 600px;
     margin: auto;
     background-color: black;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .error-message,
-  .form-group small {
-    color: red;
-    font-size: 0.875rem;
-    /* Adjust size as needed */
-  }
-
-  .estalam-header {
+.visit-header {
     text-align: center;
     color: white;
     margin-bottom: 20px;
-  }
+}
 
-  .service-description {
+.service-description {
     background-color: #28a745;
     padding: 10px;
     margin-bottom: 20px;
-  }
+}
 
-  .service-title h3 {
+.service-title h3 {
     color: #fff;
     text-align: center;
     margin: 0;
-  }
+}
 
-  .form-container {
+.form-container {
     border: 2px solid #28a745;
     padding: 20px;
     border-radius: 10px;
     background-color: #333;
-  }
+}
 
-  .form-group {
+.form-group {
     margin-bottom: 20px;
-  }
+}
 
-  .form-group label {
+.form-group label {
     color: white;
     display: block;
     margin-bottom: 5px;
-  }
+}
 
-  .form-group input {
+.form-group input {
     background-color: #fff;
     color: #000;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-  }
+}
 
-  .captcha-container {
+.captcha-container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-  }
+}
 
-  .captcha-image {
+.captcha-image {
     padding: 2px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
@@ -83,9 +76,9 @@
     font-size: 24px;
     letter-spacing: 2px;
     margin-right: 10px;
-  }
+}
 
-  .refresh-icon {
+.refresh-icon {
     font-size: 24px;
     cursor: pointer;
     color: #28a745;
@@ -93,14 +86,21 @@
     background: none;
     padding: 0;
     margin-left: 10px;
-  }
+}
 
-  .form-actions {
+.form-actions {
     display: flex;
     justify-content: space-between;
-  }
+}
 
-  .btn {
+.error-message,
+.form-group small {
+    color: red;
+    font-size: 0.875rem;
+    /* Adjust size as needed */
+}
+
+.btn {
     width: 100px;
     padding: 10px;
     border-radius: 5px;
@@ -109,34 +109,34 @@
     text-decoration: none;
     display: inline-block;
     margin-top: 10px;
-  }
+}
 
-  .btn-primary {
+.btn-primary {
     background-color: #28a745;
     border-color: #28a745;
-  }
+}
 
-  .btn-primary:hover {
+.btn-primary:hover {
     background-color: #218838;
     border-color: #218838;
-  }
+}
 
-  .btn-secondary {
+.btn-secondary {
     background-color: #6c757d;
     border-color: #6c757d;
-  }
+}
 
-  .btn-secondary:hover {
+.btn-secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;
-  }
+}
 
-  .btn-info {
+.btn-info {
     background-color: #17a2b8;
     border-color: #17a2b8;
-  }
+}
 
-  .btn-info:hover {
+.btn-info:hover {
     background-color: #138496;
     border-color: #117a8b;
-  }
+}

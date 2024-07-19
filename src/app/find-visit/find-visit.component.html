@@ -1,0 +1,46 @@
+<div class="visit-container my-4">
+    <div class="visit-header">
+        <h2>استفسار عن زيارة</h2>
+    </div>
+    <div class="service-description">
+        <div class="service-title">
+            <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة التأشيرة</h3>
+        </div>
+    </div>
+
+    <!-- Display error message if inquiryResult is not false -->
+    <h4 *ngIf="inquiryResult" class="error-message text-danger">{{ inquiryResult }}</h4>
+
+    <div class="form-container" *ngIf="visitForm">
+        <form [formGroup]="visitForm" (ngSubmit)="submitForm()">
+            <div class="form-group">
+                <label for="visaNo">رقم التأشيرة</label>
+                <input type="text" class="form-control" id="visaNo" formControlName="visaNo"
+                    placeholder="الرجاء إدخال رقم التأشيرة" />
+                <div *ngIf="visitForm.get('visaNo')?.touched && visitForm.get('visaNo')?.invalid">
+                    <small *ngIf="visitForm.get('visaNo')?.errors?.['required']" class="error-text">رقم التأشيرة
+                        مطلوب</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="captcha">الرمز المرئي</label>
+                <div class="captcha-container">
+                    <div class="captcha-image">{{ captchaText }}</div>
+                    <button type="button" class="refresh-icon" (click)="generateCaptcha()">&#8635;</button>
+                </div>
+                <input type="text" class="form-control" id="captcha" formControlName="captcha"
+                    placeholder="الرجاء إدخال الرمز المرئي" />
+                <div *ngIf="visitForm.get('captcha')?.touched && visitForm.get('captcha')?.invalid">
+                    <small *ngIf="visitForm.get('captcha')?.errors?.['required']" class="error-text">الرمز المرئي
+                        مطلوب</small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="visitForm.invalid">عرض</button>
+                <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+            </div>
+        </form>
+    </div>
+</div>

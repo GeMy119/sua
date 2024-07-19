@@ -1,0 +1,118 @@
+<div class="visa-container my-5" id="visa-container">
+    <div class="header">
+        <div class="header-left">
+            <img src="../../assets/WhatsApp Image 2024-07-19 at 15.44.56_155cb1b2.jpg" alt="User Photo">
+        </div>
+        <div class="header-right">
+            <img src="../../assets/WhatsApp Image 2024-07-19 at 15.41.45_d10cf6c7.jpg" alt="User Photo">
+        </div>
+    </div>
+    <div class="visa-info">
+        <div class="photo-column">
+            <img [src]="data.image" alt="User Photo">
+        </div>
+        <div class="info-column">
+            <div class="visa-row">
+                <div class="label">Visa No.</div>
+                <div class="value">{{data.visaNo}}</div>
+                <div class="label-ar">رقم التأشيرة</div>
+            </div>
+            <div class="visa-row">
+                <div class="label">Valid from</div>
+                <div class="value">{{data.validFrom | removeTimeFromDate}}</div>
+                <div class="label-ar">صالحة اعتبارا من</div>
+            </div>
+            <div class="visa-row">
+                <div class="label">Valid until</div>
+                <div class="value">{{data.validUntil | removeTimeFromDate}}</div>
+                <div class="label-ar">صالحة لغاية</div>
+            </div>
+            <div class="visa-row">
+                <div class="label">Duration of Stay</div>
+                <div class="value">{{data.durationOfStay}}</div>
+                <div class="label-ar">مدة الإقامة</div>
+            </div>
+            <div class="visa-row">
+                <div class="label">Passport No.</div>
+                <div class="value">{{data.passportNo}}</div>
+                <div class="label-ar">رقم جواز السفر</div>
+            </div>
+        </div>
+    </div>
+    <div class="personal-info">
+        <div class="info-row">
+            <div class="label">Place of issue</div>
+            <div class="value">{{data.placeOfIssue}}</div>
+            <div class="label-ar">مصدر التأشيرة</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Name</div>
+            <div class="value">{{data.name}}</div>
+            <div class="label-ar">الاسم</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Birth Date</div>
+            <div class="value">{{data.birthDate | removeTimeFromDate}}</div>
+            <div class="label-ar">تاريخ الميلاد</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Nationality</div>
+            <div class="value">{{data.nationality}}</div>
+            <div class="label-ar">الجنسية</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Type Of Visa</div>
+            <div class="value">{{data.typeOfVisa}}</div>
+            <div class="label-ar">نوع التأشيرة</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Entry Type</div>
+            <div class="value">{{data.entryType}}</div>
+            <div class="label-ar">عدد مرات الدخول</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Purpose</div>
+            <div class="value">{{data.purpose}}</div>
+            <div class="label-ar">الغرض</div>
+        </div>
+    </div>
+    <div class="additional-info">
+        <div class="info-row">
+            <div class="label">Code</div>
+            <div class="value">{{data.code}}</div>
+            <div class="label-ar">رمز</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Visa No.</div>
+            <div class="value">{{data.visaNo}}</div>
+            <div class="label-ar">رقم التأشيرة</div>
+        </div>
+        <div class="info-row">
+            <div class="label">Application No.</div>
+            <div class="value">{{data.passportNo}}</div>
+            <div class="label-ar">رقم الطلب</div>
+        </div>
+    </div>
+    <div class="barcode-section">
+        <div class="barcode-row w-100 d-flex justify-content-center">
+            <div class="barcode-item w-50 my-3  d-flex justify-content-center">
+                <!-- <div class="label">Barcode</div> -->
+                <img [src]="data.barcodeImage" class="w-25" alt="Barcode1">
+            </div>
+        </div>
+    </div>
+    <div class="note">
+        <p>
+            غير مصرح بالحج أو الإقامة في مكة المكرمة خلال فترة موسم الحج من 15 ذو القعدة إلى 15 ذو الحجة
+        </p>
+        <p>
+            Not permitted to perform Hajj or to stay in Makkah during Hajj season (from 15 Dhu al-Qadah to 15 Dhu
+            al-Hijjah)
+        </p>
+    </div>
+</div>
+
+<div class="button-container">
+    <button (click)="print()">Print</button>
+    <button (click)="downloadPDF()">Download as PDF</button>
+</div>

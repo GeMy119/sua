@@ -1,26 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SponsorService } from './services/estalam.service';
 import { Router } from '@angular/router';
+import { FindVisitService } from './services/find-visit.service';
 
 @Component({
-  selector: 'app-estalam',
-  templateUrl: './estalam.component.html',
-  styleUrls: ['./estalam.component.css']
+  selector: 'app-find-visit',
+  templateUrl: './find-visit.component.html',
+  styleUrls: ['./find-visit.component.css']
 })
-export class EstalamComponent implements OnInit {
-  estalamForm: FormGroup;
+export class FindVisitComponent implements OnInit {
+  visitForm: FormGroup;
   inquiryResult: string | false = false; // Display error message in Arabic
   captchaText: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private SponsorService: SponsorService,
+    private findVisitService: FindVisitService,
     private router: Router
   ) {
-    this.estalamForm = this.formBuilder.group({
-      sponsorId: ['', Validators.required],
-      sourceNumber: ['', Validators.required],
+    this.visitForm = this.formBuilder.group({
+      visaNo: ['', Validators.required], // Example pattern for numbers
       captcha: ['', Validators.required]
     });
   }
@@ -30,24 +29,23 @@ export class EstalamComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.estalamForm.valid) {
-      if (this.estalamForm.get('captcha')!.value === this.captchaText) {
-        const sponsorId = this.estalamForm.get('sponsorId')!.value;
-        const sourceNumber = this.estalamForm.get('sourceNumber')!.value;
-        this.SponsorService.getSingleSponsor(sponsorId, sourceNumber)
+    if (this.visitForm.valid) {
+      if (this.visitForm.get('captcha')!.value === this.captchaText) {
+        const visaNo = this.visitForm.get('visaNo')!.value;
+        this.findVisitService.getVisit(visaNo)
           .subscribe(
             (response) => {
               if (response && response.data) {
-                this.router.navigate(['/ardestalam'], { state: { data: response.data } });
+                this.router.navigate(['/visit-show'], { state: { data: response.data } });
               } else {
-                this.inquiryResult = 'الوثيقة غير موجودة';
+                this.inquiryResult = 'لم يتم العثور على التأشيره';
               }
             },
             (error) => {
               if (error.status === 404) {
-                this.inquiryResult = 'الوثيقة غير موجودة';
+                this.inquiryResult = 'لم يتم العثور على التأشيره';
               } else {
-                console.error('خطأ في الاستفسار:', error);
+                console.error('خطأ في الاستفسار عن التأشيره:', error);
                 this.inquiryResult = 'حدث خطأ، يرجى المحاولة لاحقاً';
               }
             }
@@ -61,7 +59,7 @@ export class EstalamComponent implements OnInit {
   }
 
   clearForm() {
-    this.estalamForm.reset();
+    this.visitForm.reset();
     this.generateCaptcha();
   }
 

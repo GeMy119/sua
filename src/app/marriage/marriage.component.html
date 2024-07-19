@@ -1,28 +1,54 @@
-<div class="marriage-container">
+<div class="marriage-container my-4">
   <div class="marriage-header">
-    <h2>استفسار حالة التصاريح</h2>
+    <h2>استفسار عن تصاريح الزواج</h2>
   </div>
   <div class="service-description">
     <div class="service-title">
-      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة التصاريح</h3>
+      <h3>تتيح هذه الخدمة الإلكترونية للمواطنين والمقيمين إمكانية الاستعلام عن حالة تصاريح الزواج</h3>
     </div>
   </div>
-  <div class="form-container">
-    <h4 *ngIf="inquiryResult">الرجاء التأكد من رقم الهويه او رقم الصادر</h4>
+
+  <!-- Display error message if inquiryResult is not null -->
+  <h4 *ngIf="inquiryResult" class="error-message text-danger">{{ inquiryResult }}</h4>
+
+  <div class="form-container" *ngIf="marriageForm">
     <form [formGroup]="marriageForm" (ngSubmit)="submitForm()">
       <div class="form-group">
         <label for="idNumber">رقم الهوية</label>
         <input type="text" class="form-control" id="idNumber" formControlName="idNumber"
-          placeholder="الرجاء إدخال رقم الهوية">
+          placeholder="الرجاء إدخال رقم الهوية" />
+        <div *ngIf="marriageForm.get('idNumber')?.touched && marriageForm.get('idNumber')?.invalid">
+          <small *ngIf="marriageForm.get('idNumber')?.errors?.['required']" class="error-text">رقم الهوية مطلوب</small>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="issueNumber">رقم القيد</label>
-        <input type="text" class="form-control" id="issueNumber" formControlName="issueNumber"
-          placeholder="الرجاء إدخال رقم الصادر">
-      </div>
-      <button type="submit" class="btn btn-primary">عرض</button>
 
-      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+      <div class="form-group">
+        <label for="issueNumber">رقم الإصدار</label>
+        <input type="text" class="form-control" id="issueNumber" formControlName="issueNumber"
+          placeholder="الرجاء إدخال رقم الإصدار" />
+        <div *ngIf="marriageForm.get('issueNumber')?.touched && marriageForm.get('issueNumber')?.invalid">
+          <small *ngIf="marriageForm.get('issueNumber')?.errors?.['required']" class="error-text">رقم الإصدار
+            مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="captcha">الرمز المرئي</label>
+        <div class="captcha-container">
+          <div class="captcha-image">{{ captchaText }}</div>
+          <button type="button" class="refresh-icon" (click)="generateCaptcha()">&#8635;</button>
+        </div>
+        <input type="text" class="form-control" id="captcha" formControlName="captcha"
+          placeholder="الرجاء إدخال الرمز المرئي" />
+        <div *ngIf="marriageForm.get('captcha')?.touched && marriageForm.get('captcha')?.invalid">
+          <small *ngIf="marriageForm.get('captcha')?.errors?.['required']" class="error-text">الرمز المرئي مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="marriageForm.invalid">عرض</button>
+        <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+      </div>
     </form>
   </div>
 </div>

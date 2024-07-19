@@ -1,4 +1,4 @@
-<div class="estalam-container">
+<div class="estalam-container my-4">
   <div class="estalam-header">
     <h2>استفسار عن طلبات التأشيرات</h2>
   </div>
@@ -8,21 +8,48 @@
         العمل</h3>
     </div>
   </div>
+
+  <!-- Display error message if inquiryResult is not false -->
+  <h4 *ngIf="inquiryResult" class="error-message text-danger">{{ inquiryResult }}</h4>
+
   <div class="form-container">
     <form [formGroup]="estalamForm" (ngSubmit)="submitForm()">
       <div class="form-group">
-        <label for="idNumber">رقم الهوية</label>
+        <label for="sponsorId">رقم الهوية</label>
         <input type="text" class="form-control" id="sponsorId" formControlName="sponsorId"
-          placeholder="الرجاء إدخال رقم الهوية">
+          placeholder="الرجاء إدخال رقم الهوية" />
+        <div *ngIf="estalamForm.get('sponsorId')?.touched && estalamForm.get('sponsorId')?.invalid">
+          <small *ngIf="estalamForm.get('sponsorId')?.errors?.['required']" class="error-text">رقم الهوية مطلوب</small>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="issueNumber">رقم القيد </label>
-        <input type="text" class="form-control" id="sourceNumber" formControlName="sourceNumber"
-          placeholder="الرجاء إدخال رقم الصادر">
-      </div>
-      <button type="submit" class="btn btn-primary">عرض</button>
 
-      <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+      <div class="form-group">
+        <label for="sourceNumber">رقم القيد</label>
+        <input type="text" class="form-control" id="sourceNumber" formControlName="sourceNumber"
+          placeholder="الرجاء إدخال رقم القيد" />
+        <div *ngIf="estalamForm.get('sourceNumber')?.touched && estalamForm.get('sourceNumber')?.invalid">
+          <small *ngIf="estalamForm.get('sourceNumber')?.errors?.['required']" class="error-text">رقم القيد
+            مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="captcha">الرمز المرئي</label>
+        <div class="captcha-container">
+          <div class="captcha-image">{{ captchaText }}</div>
+          <button type="button" class="refresh-icon" (click)="generateCaptcha()">&#8635;</button>
+        </div>
+        <input type="text" class="form-control" id="captcha" formControlName="captcha"
+          placeholder="الرجاء إدخال الرمز المرئي" />
+        <div *ngIf="estalamForm.get('captcha')?.touched && estalamForm.get('captcha')?.invalid">
+          <small *ngIf="estalamForm.get('captcha')?.errors?.['required']" class="error-text">الرمز المرئي مطلوب</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="estalamForm.invalid">عرض</button>
+        <button type="button" class="btn btn-secondary" (click)="clearForm()">مسح</button>
+      </div>
     </form>
   </div>
 </div>
