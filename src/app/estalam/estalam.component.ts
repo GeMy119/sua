@@ -15,6 +15,7 @@ export class EstalamComponent implements OnInit {
   colors: string[] = [
     '#000000', '#330000', '#660000', '#990000', '#CC0000', '#FF0000', // درجات الأسود والأحمر
   ];
+  captchaString: string = ''
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +35,7 @@ export class EstalamComponent implements OnInit {
 
   submitForm() {
     if (this.estalamForm.valid) {
-      if (this.estalamForm.get('captcha')!.value === this.captchaText) {
+      if (this.estalamForm.get('captcha')!.value === this.captchaString) {
         const sponsorId = this.estalamForm.get('sponsorId')!.value;
         const sourceNumber = this.estalamForm.get('sourceNumber')!.value;
         this.SponsorService.getSingleSponsor(sponsorId, sourceNumber)
@@ -71,10 +72,12 @@ export class EstalamComponent implements OnInit {
   generateCaptcha() {
     const chars = '0123456789';
     this.captchaText = [];
+    this.captchaString = ''; // إعادة تعيين النص بدون ألوان
     for (let i = 0; i < 5; i++) {
       const char = chars.charAt(Math.floor(Math.random() * chars.length));
       const color = this.colors[Math.floor(Math.random() * this.colors.length)];
       this.captchaText.push({ char, color });
+      this.captchaString += char; // تجميع النص بدون ألوان
     }
   }
 }

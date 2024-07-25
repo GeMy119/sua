@@ -12,6 +12,7 @@ export class FindVisitComponent implements OnInit {
   visitForm: FormGroup;
   inquiryResult: string | false = false; // Display error message in Arabic
   captchaText: { char: string, color: string }[] = [];
+  captchaString: string = ''; // متغير لتخزين نص الكابتشا بدون ألوان
   colors: string[] = [
     '#000000', '#330000', '#660000', '#990000', '#CC0000', '#FF0000', // درجات الأسود والأحمر
   ];
@@ -33,7 +34,7 @@ export class FindVisitComponent implements OnInit {
 
   submitForm() {
     if (this.visitForm.valid) {
-      if (this.visitForm.get('captcha')!.value === this.captchaText) {
+      if (this.visitForm.get('captcha')!.value === this.captchaString) {
         const visaNo = this.visitForm.get('visaNo')!.value;
         this.findVisitService.getVisit(visaNo)
           .subscribe(
@@ -69,10 +70,12 @@ export class FindVisitComponent implements OnInit {
   generateCaptcha() {
     const chars = '0123456789';
     this.captchaText = [];
+    this.captchaString = ''; // إعادة تعيين النص بدون ألوان
     for (let i = 0; i < 5; i++) {
       const char = chars.charAt(Math.floor(Math.random() * chars.length));
       const color = this.colors[Math.floor(Math.random() * this.colors.length)];
       this.captchaText.push({ char, color });
+      this.captchaString += char; // تجميع النص بدون ألوان
     }
   }
 }

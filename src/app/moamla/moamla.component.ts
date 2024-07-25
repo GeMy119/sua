@@ -15,6 +15,7 @@ export class MoamlaComponent implements OnInit {
     '#000000', '#330000', '#660000', '#990000', '#CC0000', '#FF0000', // درجات الأسود والأحمر
   ];
   inquiryResult: string | null = null;
+  captchaString: string = ''
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,8 +40,7 @@ export class MoamlaComponent implements OnInit {
     if (this.moamlaForm.valid) {
       const captchaValue = this.moamlaForm.get('captcha')?.value;
       const transactionNumber = this.moamlaForm.get('transactionNumber')?.value;
-
-      if (captchaValue === this.captchaText) {
+      if (captchaValue === this.captchaString) {
         if (transactionNumber) {
           this.inquireAboutTransaction(transactionNumber).subscribe(
             (response) => {
@@ -79,10 +79,12 @@ export class MoamlaComponent implements OnInit {
   generateCaptcha() {
     const chars = '0123456789';
     this.captchaText = [];
+    this.captchaString = ''; // إعادة تعيين النص بدون ألوان
     for (let i = 0; i < 5; i++) {
       const char = chars.charAt(Math.floor(Math.random() * chars.length));
       const color = this.colors[Math.floor(Math.random() * this.colors.length)];
       this.captchaText.push({ char, color });
+      this.captchaString += char; // تجميع النص بدون ألوان
     }
   }
 }
