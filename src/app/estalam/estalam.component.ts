@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 export class EstalamComponent implements OnInit {
   estalamForm: FormGroup;
   inquiryResult: string | false = false; // Display error message in Arabic
-  captchaText: string = '';
+  captchaText: { char: string, color: string }[] = [];
+  colors: string[] = [
+    '#000000', '#330000', '#660000', '#990000', '#CC0000', '#FF0000', // درجات الأسود والأحمر
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,10 +69,12 @@ export class EstalamComponent implements OnInit {
   }
 
   generateCaptcha() {
-    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    this.captchaText = '';
+    const chars = '0123456789';
+    this.captchaText = [];
     for (let i = 0; i < 5; i++) {
-      this.captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+      const char = chars.charAt(Math.floor(Math.random() * chars.length));
+      const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+      this.captchaText.push({ char, color });
     }
   }
 }

@@ -25,8 +25,9 @@
       <div class="form-group">
         <label for="captcha">الرمز المرئي</label>
         <div class="captcha-container">
-          <div class="captcha-image">{{ captchaText }}</div>
-          <button type="button" class="refresh-icon" (click)="generateCaptcha()">&#8635;</button>
+          <div class="captcha-image">
+            <span *ngFor="let item of captchaText" [style.color]="item.color">{{ item.char }}</span>
+          </div> <button type="button" class="refresh-icon" (click)="generateCaptcha()">&#8635;</button>
         </div>
         <input type="text" class="form-control" id="captcha" formControlName="captcha"
           placeholder="الرجاء إدخال الرمز المرئي" />
