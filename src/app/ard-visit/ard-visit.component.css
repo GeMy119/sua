@@ -107,3 +107,33 @@
 .button-container button:hover {
     background-color: #45a049;
 }
+
+.visa-row div:nth-child(2),
+.info-row .value {
+    color: #bd10bd;
+}
+
+.checkmarks-row {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.checkmark {
+
+    font-size: 24px;
+    /* حجم أصغر لعلامة الصح */
+    margin: 0 10px;
+    font-weight: bolder;
+    /* جعل العلامات عريضة */
+}
+
+/* الألوان المتناوبة */
+.checkmark-2 {
+    color: #bd10bd;
+
+}
+
+.checkmark-1 {
+    color: #dc8adc;
+
+}

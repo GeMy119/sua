@@ -39,7 +39,8 @@ import { HijriDatePipe } from './pipes/moment-hijri.pipe';
     RemoveTimeFromDatePipe,
     HijriDatePipe,
     ArdVisitComponent,
-    FindVisitComponent
+    FindVisitComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
