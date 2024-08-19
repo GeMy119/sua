@@ -4,20 +4,20 @@
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
-    font-family: Arial, sans-serif;
+    font-family: Amiri, Arial, sans-serif;
     background-color: #fff;
+    box-sizing: border-box;
 }
 
 .header {
     display: flex;
-    width: 100%;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .header-left img {
-    width: 70px !important;
+    width: 70px;
     margin: 0;
     margin-bottom: 10px;
 }
@@ -30,12 +30,13 @@
 .visa-info {
     display: flex;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .photo-column {
-    width: 100%;
     flex: 1;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .photo-column img {
@@ -47,6 +48,7 @@
 .info-column {
     flex: 2;
     padding-right: 20px;
+    box-sizing: border-box;
 }
 
 .visa-row,
@@ -55,6 +57,7 @@
     justify-content: space-between;
     padding: 5px 0;
     border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 .label,
@@ -86,6 +89,11 @@
     text-align: center;
     font-size: 12px;
     color: red;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .button-container {
@@ -110,7 +118,7 @@
 
 .visa-row div:nth-child(2),
 .info-row .value {
-    color: #bd10bd;
+    color: #6A2973;
 }
 
 .checkmarks-row {
@@ -119,21 +127,59 @@
 }
 
 .checkmark {
-
     font-size: 24px;
-    /* حجم أصغر لعلامة الصح */
     margin: 0 10px;
     font-weight: bolder;
-    /* جعل العلامات عريضة */
 }
 
-/* الألوان المتناوبة */
 .checkmark-2 {
-    color: #bd10bd;
-
+    color: #6A2973 !important;
 }
 
 .checkmark-1 {
-    color: #dc8adc;
+    color: #dc8adc !important;
+}
 
+@media (max-width: 600px) {
+    .visa-container {
+        padding: 10px;
+    }
+
+    .header-left img,
+    .header-right img,
+    .photo-column img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .label,
+    .label-ar,
+    .value {
+        font-size: 12px;
+    }
+
+    .checkmark {
+        font-size: 14px;
+        margin: 0 5px;
+    }
+
+    /* تقليل عدد علامات الصح */
+    .checkmarks-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .checkmarks-row .checkmark:nth-child(n+7) {
+        display: none;
+    }
+
+    .note {
+        font-size: 10px;
+    }
+
+    .button-container button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
 }
