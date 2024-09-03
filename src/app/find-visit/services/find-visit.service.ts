@@ -21,4 +21,14 @@ export class FindVisitService {
       })
     );
   }
+  getVisitByQuery(visitNo: string): Observable<any> {
+    const url = `${this.apiUrl}/findVisit?visaNo=${visitNo}`;
+    console.log(url);
+    return this.http.get<any>(url).pipe(
+      catchError(error => {
+        throw 'Error in retrieving visit data: ' + error;
+      })
+    );
+  }
 }
+

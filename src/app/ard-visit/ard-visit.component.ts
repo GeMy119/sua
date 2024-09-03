@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FindVisitService } from '../find-visit/services/find-visit.service';
 
 @Component({
   selector: 'app-ard-visit',
@@ -14,10 +16,37 @@ export class ArdVisitComponent implements OnInit {
   print() {
     window.print();
   }
-
+  constructor(
+    private route: ActivatedRoute,
+    private findVisitService: FindVisitService,
+    private router: Router
+  ) { }
   ngOnInit(): void {
-    this.data = history.state.data || {}; // Ensure data is not undefined
-    this.fetchImagesFromDatabase();
+    // Check if data is passed via state
+    this.data = history.state.data || {};
+    if (!this.data.visaNo) {
+      // Get visaNo from query params if not in state data
+      this.route.queryParams.subscribe(params => {
+        const visaNo = params['visaNo'];
+        if (visaNo) {
+          this.fetchVisitDetails(visaNo);
+        }
+      });
+    } else {
+      this.fetchImagesFromDatabase();
+    }
+  }
+
+  fetchVisitDetails(visaNo: string) {
+    this.findVisitService.getVisit(visaNo).subscribe(
+      response => {
+        this.data = response.data;
+        this.fetchImagesFromDatabase();
+      },
+      error => {
+        console.error('Error fetching visit details:', error);
+      }
+    );
   }
 
   fetchImagesFromDatabase() {
