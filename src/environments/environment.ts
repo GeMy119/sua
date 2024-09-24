@@ -8,7 +8,7 @@ export interface Environment {
 }
 export const environment: Environment = {
   production: false,
-  apiUrl: "https://api.suadiestalamsurvices.com"
+  apiUrl: "https://api.suadiservicesestalam.com"
 };
 /*
  * For easier debugging in development mode, you can import the following file
