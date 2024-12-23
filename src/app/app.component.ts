@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'الاستعلام العام عن الخدمات الالكترونية برقم المعاملة';
+  title = 'الخدمات الالكترونيةالاستعلام العام برقم المعامله';
 }
